@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AnimalResponseDTO, AnimalService } from '../../../core/api/generated';
-import { Species } from '../../../core/enums/clinic-enums';
+import { Gender, Species } from '../../../core/enums/clinic-enums';
 
 @Component({
   selector: 'app-animal-list',
@@ -13,15 +13,23 @@ import { Species } from '../../../core/enums/clinic-enums';
 export class AnimalList implements OnInit {
   
   animals: AnimalResponseDTO[] = [];
-
   searchTerm: string = '';
-  selectedSpecies: Species | null = null;
-
-  speciesOptions = Object.values(Species);
-
   errorMessage : string | null = null;
 
-  constructor(private animalService : AnimalService)
+  selectedSpecies: number | null = null;
+
+  speciesOptions = [
+    {name: 'Canine', value: 0},
+    {name: 'Feline', value: 1},
+    {name: 'Avian', value: 2},
+    {name: 'Equine', value: 3}
+  ];
+
+  genderOptions = ['Male', 'Female'];
+
+  
+
+  constructor(private animalService : AnimalService, private cdr: ChangeDetectorRef)
   {
 
   }
@@ -30,11 +38,24 @@ export class AnimalList implements OnInit {
     this.loadAnimals();
   }
 
-  loadAnimals(): void {
-    this.animalService.getAnimals(this.searchTerm || undefined, (this.selectedSpecies as any) || undefined)
+  loadAnimals(dropdownValue?: string): void {
+    this.errorMessage = null;
+
+    if(dropdownValue !== undefined)
+    {
+      this.selectedSpecies = dropdownValue === 'null' ? null : Number(dropdownValue);
+    }
+ 
+    const speciesFilter = this.selectedSpecies !== null ? this.selectedSpecies : undefined;
+
+    console.log("Frontend is sending multiplexed query id:", speciesFilter);
+
+    this.animalService.getAnimals(this.searchTerm || undefined, speciesFilter as any)
       .subscribe({
         next: (data) => {
           this.animals = data;
+          this.cdr.detectChanges();
+          console.log("raw net backend payload returned:", JSON.stringify(data));
         },
         error: (err) => {
           if(err.status === 403)
@@ -54,4 +75,16 @@ export class AnimalList implements OnInit {
       });
   }
 
+  getSpeciesName(speciesValue: any): string
+  {
+    if(speciesValue === null || speciesValue === undefined || speciesValue === '')
+    {
+      return 'Unknown';
+    }
+
+    const match = this.speciesOptions.find(opt => opt.value === speciesValue);
+    return match ? match.name : 'Unknown';
+  }
+
+ 
 }
