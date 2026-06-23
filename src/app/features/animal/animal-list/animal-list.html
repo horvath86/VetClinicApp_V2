@@ -6,12 +6,12 @@
     <div class="filter-bar">
         <input type="text" [(ngModel)]="searchTerm" (input)="loadAnimals()" placeholder="Search by code or name...">
 
-        <select #speciesSelect (change)="loadAnimals(speciesSelect.value)">
-            <option value="null">All Species</option>
+        <select [(ngModel)]="selectedSpecies" (change)="loadAnimals()">
+            <option [ngValue]="null">All Species</option>
 
-            @for (opt of speciesOptions; track opt.value)
+            @for (speciesName of speciesOptions; track speciesName; let i = $index)
             {
-                <option [value]="opt.value">{{opt.name}}</option>
+                <option [ngValue]="i">{{speciesName}}</option>
             }
 
         </select>
@@ -31,7 +31,7 @@
                 <h3>{{animal.name}}</h3>
                 <div class="card-details">
                     <p><strong>Code: </strong>{{animal.code}}</p>
-                    <p><strong>Species: </strong>{{getSpeciesName(animal.species)}}</p>
+                    <p><strong>Species: </strong>{{speciesOptions[animal.species!]}}</p>
                     <p><strong>Date of Birth: </strong>{{animal.dateOfBirth}}</p>
                     <p><strong>Gender: </strong>{{genderOptions[animal.gender!]}}</p>
                     <p><strong>Owner ID: </strong>{{animal.ownerName}}</p>
