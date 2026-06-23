@@ -25,7 +25,17 @@ export class TranslationService
             gender: 'Gender',
             owner: 'Owner',
             activeProfile: 'Active profile',
-            noRecords: 'No animal patient matches your search parameters.'
+            noRecords: 'No items matches your search parameters.',
+            name: 'Name',
+            phone: 'Phone',
+            email: 'Email',
+            licenceNumber: 'Licence number',
+            role: 'Role',
+            active: 'Active',
+            allUsers: 'All users',
+            err403: 'No permission to access data.',
+            err0: 'Server error. Please Try again later.',
+            errGeneric: 'Error while fetching data.'
         },
         sr: {
             appName: 'VetKlinika',
@@ -40,7 +50,17 @@ export class TranslationService
             gender: 'Pol',
             owner: 'Vlasnik',
             activeProfile: 'Aktivni profil',
-            noRecords: 'Nema pacijenata koji se poklapaju sa vašim parametrima pretrage.'
+            noRecords: 'Nema stavki koje se poklapaju sa vašim parametrima pretrage.',
+            name: 'Ime',
+            phone: 'Telefon',
+            email: 'Email',
+            licenceNumber: 'Broj licence',
+            role: 'Uloga',
+            active: 'Aktivan',
+            allUsers: 'Svi korisnici',
+            err403: 'Nemate dozvolu da pristupite podacima.',
+            err0: 'Serverska greška. Molim vas probajte kasnije.',
+            errGeneric: 'Greška pri dobavljanju podataka.'
         }
     }
 
@@ -55,4 +75,16 @@ export class TranslationService
 
         this.LanguageChanged$.next(this.currentLang);
     }
+
+    getErrorMessage(errorKey: string | null): string
+    {
+        if(!errorKey)
+        {
+            return '';
+        } 
+        
+        const activeDictionary = this.dictionary[this.currentLang] as Record<string,string>;
+        return activeDictionary[errorKey] || '';
+    }
+    
 }

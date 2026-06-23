@@ -1,0 +1,44 @@
+<div class="user-dashboard">
+    <header class="dashboard-header">
+        <h1>{{translate.t.users}}</h1>
+    </header>
+
+    <div class="filter-bar">
+        <select [(ngModel)]="selectedRole" (change)="loadUsers()">
+            <option [ngValue]="null">{{translate.t.allUsers}}</option>
+
+            @for (roleName of roleOptions; track roleName; let i = $index) {
+                <option [ngValue]="i">{{roleName}}</option>
+            }
+        </select>
+    </div>
+
+    @if(errorMessage)
+    {
+        <div class = "error-banner">
+            <p>{{translate.getErrorMessage(errorMessage)}}</p>
+        </div>
+    }
+
+    <div class="grid-container">
+        @for (user of users; track user.id) {
+            <div class="user-card">
+                <h3>{{user.name}}</h3>
+                <h3>{{roleOptions[user.role!]}}</h3>
+                <div class="card-details">
+                    <p><strong>{{translate.t.licenceNumber}}: </strong>{{user.licenceNumber}}</p>
+                    <p><strong>{{translate.t.phone}}: </strong>{{user.phone}}</p>
+                    <p><strong>{{translate.t.email}}: </strong>{{user.email}}</p>
+                    <p><strong>{{translate.t.active}}: </strong>{{user.isActive}}</p>
+                </div>
+            </div>
+        }@empty{
+            @if(!errorMessage){
+                <div class="no-records">
+                    <p>{{translate.t.noRecords}}</p>
+                </div>
+            }
+        }
+    </div>
+
+</div>

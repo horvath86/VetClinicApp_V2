@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AnimalResponseDTO, AnimalService } from '../../../core/api/generated';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './animal-list.html',
   styleUrl: './animal-list.scss',
 })
-export class AnimalList implements OnInit {
+export class AnimalList implements OnInit, OnDestroy{
   
   animals: AnimalResponseDTO[] = [];
 
@@ -23,7 +23,7 @@ export class AnimalList implements OnInit {
   speciesOptions = Object.values(Species).filter(v => typeof v === 'string')as string[];
   genderOptions = Object.values(Gender);
 
-private langSubscription: Subscription | null = null;
+  langSubscription: Subscription | null = null;
 
   constructor(private animalService : AnimalService, private cdr: ChangeDetectorRef, public translation: TranslationService)
   {
@@ -53,19 +53,26 @@ private langSubscription: Subscription | null = null;
         error: (err) => {
           if(err.status === 403)
           {
-            this.errorMessage = "No permission to access data";
+            this.errorMessage = "err403";
           }
           else if(err.status === 0)
           {
-            this.errorMessage = "Server error. Please Try again later.";
+            this.errorMessage = "err0";
           }
           else
           {
-            this.errorMessage = "Error while fetching animal data.";
+            this.errorMessage = "errGeneric";
           }
 
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    if(this.langSubscription)
+    {
+      this.langSubscription.unsubscribe();
+    }
   }
 
  
