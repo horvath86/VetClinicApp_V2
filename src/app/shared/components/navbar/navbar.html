@@ -1,0 +1,17 @@
+<nav class="navbar">
+    <div class="nav-brand">
+        <h2>Logo {{translate.t.appName}}</h2>
+    </div>
+
+    <div class="nav-links">
+        <a routerLink="/animals" routerLinkActive="active-tab">{{translate.t.patients}}</a>
+        <a routerLink="/users" routerLinkActive="active-tab">{{translate.t.users}}</a>
+    </div>
+
+    <div class="navActions">
+        <button class="langBtn" (click)="translate.toggleLanguage()">{{translate.currentLang === 'en'? 'SR' : 'EN'}}</button> 
+    </div>
+
+    <button class="logout-btn" (click)="handleLogout()">{{translate.t.logout}}</button>
+
+</nav>

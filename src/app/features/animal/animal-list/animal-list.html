@@ -1,13 +1,13 @@
 <div class="animal-dashboard">
     <header class="dashboard-header">
-        <h1>Patient Registry</h1>
+        <h1>{{translation.t.patients}}</h1>
     </header>
 
     <div class="filter-bar">
-        <input type="text" [(ngModel)]="searchTerm" (input)="loadAnimals()" placeholder="Search by code or name...">
+        <input type="text" [(ngModel)]="searchTerm" (input)="loadAnimals()" placeholder="{{translation.t.searchPlaceholder}}">
 
         <select [(ngModel)]="selectedSpecies" (change)="loadAnimals()">
-            <option [ngValue]="null">All Species</option>
+            <option [ngValue]="null">{{translation.t.allSpecies}}</option>
 
             @for (speciesName of speciesOptions; track speciesName; let i = $index)
             {
@@ -30,18 +30,17 @@
             <div class="animal-card">
                 <h3>{{animal.name}}</h3>
                 <div class="card-details">
-                    <p><strong>Code: </strong>{{animal.code}}</p>
-                    <p><strong>Species: </strong>{{speciesOptions[animal.species!]}}</p>
-                    <p><strong>Date of Birth: </strong>{{animal.dateOfBirth}}</p>
-                    <p><strong>Gender: </strong>{{genderOptions[animal.gender!]}}</p>
-                    <p><strong>Owner ID: </strong>{{animal.ownerName}}</p>
-                    <span class="status-badge active">Active profile</span>
+                    <p><strong>{{translation.t.code}}: </strong>{{animal.code}}</p>
+                    <p><strong>{{translation.t.species}}: </strong>{{speciesOptions[animal.species!]}}</p>
+                    <p><strong>{{translation.t.dob}}: </strong>{{animal.dateOfBirth}}</p>
+                    <p><strong>{{translation.t.gender}}: </strong>{{genderOptions[animal.gender!]}}</p>
+                    <p><strong>{{translation.t.owner}}: </strong>{{animal.ownerName}}</p>
                 </div>
             </div>
         }@empty{
             @if(!errorMessage){
                 <div class="no-records">
-                    <p>No animal patient matches your search settings.</p>
+                    <p>{{translation.t.noRecords}}</p>
                 </div>
             }
         }

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AnimalResponseDTO, AnimalService } from '../../../core/api/generated';
 import { Gender, Species } from '../../../core/enums/clinic-enums';
+import { TranslationService } from '../../../core/services/translation.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-animal-list',
@@ -21,13 +23,19 @@ export class AnimalList implements OnInit {
   speciesOptions = Object.values(Species).filter(v => typeof v === 'string')as string[];
   genderOptions = Object.values(Gender);
 
-  constructor(private animalService : AnimalService, private cdr: ChangeDetectorRef)
+private langSubscription: Subscription | null = null;
+
+  constructor(private animalService : AnimalService, private cdr: ChangeDetectorRef, public translation: TranslationService)
   {
 
   }
 
   ngOnInit(): void {
     this.loadAnimals();
+
+    this.langSubscription = this.translation.LanguageChanged$.subscribe(() => {
+      this.cdr.detectChanges();
+    });
   }
 
   loadAnimals(): void {
