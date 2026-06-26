@@ -3,58 +3,87 @@
     justify-content: space-between;
     align-items: center;
 
-    background-color: #ffffff;
+    background-color: #c1f6ff;
+    height: 100px;
     padding: 16px 32px;
+    margin-bottom: 5px;
     border-bottom: 1px solid #e2e8f0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
 
-.nav-links{
-    display: flex;
-    gap: 24px;
+    .nav-brand{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-basis: 250px;
+        flex-shrink: 0;
 
-    a{
-        text-decoration: none;
-        color: #64748b;
-        font-size: 1rem;
-        font-weight: 500;
-        padding: 8px 12px;
-        border-radius: 6px;
-        transition: color 0.2s ease, background-color 0.2s ease;
-
-        &:hover{
-            color: #1e293b;
-            background-color: #f1f5f9;
+        h2{
+            margin: 0;
+            font-size: 2rem;
+            color: #0f172a;
+            font-weight: 700;
+            width: 100%;
+            white-space: nowrap;
         }
 
-        &.active-tab{
-            color: #3b82f6;
-            background-color: #eff6ff;
-            font-weight: 600;
+        .logo-img{
+        height: 64px;
+        width: auto;
+        display: block;
         }
     }
-}
 
-.nav-actions{
-    display: flex;
-    align-items: center;
-    gap: 16px;
 
-    .lang-btn{
-        background-color: #f8fafc;
-        border: 1px solid #e2e8f0;
-        color: #334155;
-        padding: 8px 14px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.2s ease;
+    .nav-links{
+        display: flex;
+        gap: 16px;
 
-        &:hover{
-            background-color: #f1f5f9;
-            border-color: #cbd5e1;
-            color: #0f172a;
+        a{
+            display: inline-block;
+            width: 160px;
+            text-align: center;
+            text-decoration: none;
+            color: #64748b;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 8px 0;
+            border-radius: 6px;
+            transition: color 0.2s ease, background-color 0.2s ease;
+
+            &:hover{
+                color: #1e293b;
+                background-color: #f1f5f9;
+            }
+
+            &.active-tab{
+                color: #3b82f6;
+                background-color: #eff6ff;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .nav-actions{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .lang-btn{
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover{
+                background-color: #f1f5f9;
+                border-color: #cbd5e1;
+                color: #0f172a;
+            }
         }
     }
 
