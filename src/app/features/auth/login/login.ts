@@ -25,13 +25,11 @@ export class Login {
   }
 
   onSubmit(): void {
-    console.log("click: ", this.loginCredentials);
     this.errorMessage = null;
     
     this.authService.login(this.loginCredentials).subscribe({
       next: (response) => {
-        console.log('Login successful:', response);
-        sessionStorage.setItem('curentUser', JSON.stringify(response));
+        sessionStorage.setItem('currentUser', JSON.stringify(response));
         this.router.navigate(['/animals']);
       },
       error: (err) => {
