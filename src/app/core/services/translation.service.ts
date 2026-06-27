@@ -35,7 +35,17 @@ export class TranslationService
             allUsers: 'All users',
             err403: 'No permission to access data.',
             err0: 'Server error. Please Try again later.',
-            errGeneric: 'Error while fetching data.'
+            errGeneric: 'Error while accessing data.',
+            addPatient: 'Add patient',
+            nameRequired: 'Name is required.',
+            nameTooLong: 'Name is too long. (max 50 characters)',
+            codeRequired: 'Code is required.',
+            codeTooLong: 'Code is too long. (max 20 characters)',
+            dobRequired: 'Date of birth is required.',
+            ownerIdRequired: "Owner's id is required.",
+            save: "Save",
+            saving: 'Saving...',
+            cancel: 'Cancel'
         },
         sr: {
             appName: 'VetKlinika',
@@ -60,7 +70,17 @@ export class TranslationService
             allUsers: 'Svi korisnici',
             err403: 'Nemate dozvolu da pristupite podacima.',
             err0: 'Serverska greška. Molim vas probajte kasnije.',
-            errGeneric: 'Greška pri dobavljanju podataka.'
+            errGeneric: 'Greška pri pristupanju podacima.',
+            addPatient: 'Dodaj pacijenta',
+            nameRequired: 'Ime je obavezno.',
+            nameTooLong: 'Ime je predugačko. (Max 50 karaktera)',
+            codeRequired: 'Kod je obavezan.',
+            codeTooLong: 'Kod je predugačak. (max 20 karaktera)',
+            dobRequired: 'Datum rođenja je obavezan.',
+            ownerIdRequired: 'ID vlasnika je obavezan.',
+            save: "Snimi",
+            saving: 'Snima se...',
+            cancel: 'Odustani'
         }
     }
 

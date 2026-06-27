@@ -46,18 +46,9 @@ export class UserList implements OnInit, OnDestroy {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        if(err.status === 403)
-          {
-            this.errorMessage = "err403";
-          }
-          else if(err.status === 0)
-          {
-            this.errorMessage = "err0";
-          }
-          else
-          {
-            this.errorMessage = "errGeneric";
-          }
+        if (err.status === 403) this.errorMessage = 'err403';
+        else if (err.status === 0) this.errorMessage = 'err0';
+        else this.errorMessage = 'errGeneric';
       }
       
     });

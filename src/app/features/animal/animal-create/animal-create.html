@@ -1,0 +1,89 @@
+<div class="form-container">
+    <header class="form-header">
+        <h1>{{translate.t.patients}}</h1>
+    </header>
+
+    <form [formGroup]="patientForm" (ngSubmit)="savePatient()" class="clinic-form">
+        <div class="form-group">
+            <label><strong>{{translate.t.name}}: </strong></label>
+            <input type="text" formControlName="name" maxlength="50" autocomplete="off">
+            
+            @if(getControl('name')?.invalid && (getControl('name')?.touched || getControl('name')?.dirty))
+            {
+                @if(getControl('name')?.hasError('required'))
+                {
+                    <div class="input-error">{{translate.t.nameRequired}}</div>
+                }
+                @if(getControl('name')?.hasError('maxlength'))
+                {
+                    <div class="input-error">{{translate.t.nameTooLong}}</div>
+                }
+            }
+        </div>
+
+        <div class="form-group">
+            <label><strong>{{translate.t.code}}: </strong></label>
+            <input type="text" formControlName="code" maxlength="20" autocomplete="off">
+
+            @if(getControl('code')?.invalid && (getControl('code')?.touched || getControl('code')?.dirty))
+            {
+                @if (getControl('code')?.hasError('required')) 
+                {
+                    <div class="input-error">{{translate.t.codeRequired}}</div>
+                }
+                @if(getControl('code')?.hasError('maxlength'))
+                {
+                    <div class="input-error">{{translate.t.codeTooLong}}</div>
+                }
+            }
+        </div>
+
+        <div class="form-group">
+            <label><strong>{{translate.t.species}}: </strong></label>
+            <select formControlName="species">
+                @for(speciesName of speciesOptions; track speciesName; let i = $index)
+                {
+                    <option [ngValue]="i">{{speciesName}}</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label><strong>{{translate.t.dob}}: </strong></label>
+            <input type="date" formControlName="dateOfBirth">
+
+            @if (getControl('dateOfBirth')?.invalid && (getControl('dateOfBirth')?.touched || getControl('dateOfBirth')?.dirty)) 
+            {
+                <div class="input-error">{{ translate.t.dobRequired }}</div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label><strong>{{translate.t.gender}}: </strong></label>
+            <select formControlName="gender">
+                @for(genderName of genderOptions; track genderName; let i = $index)
+                {
+                    <option [ngValue]="i">{{genderName}}</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label><strong>{{ translate.t.owner }} ID:</strong></label>
+            <input type="number" formControlName="ownerId" autocomplete="off">
+            
+            @if (getControl('ownerId')?.invalid && (getControl('ownerId')?.touched || getControl('ownerId')?.dirty)) 
+            {
+                <div class="input-error">{{ translate.t.ownerIdRequired }}</div>
+            }
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="submit-btn" [disabled]="isSaving">
+                {{ isSaving ? translate.t.saving : translate.t.save }}
+            </button>
+            <button type="button" class="cancel-btn" (click)="cancel()">{{translate.t.cancel}}</button>
+        </div>
+    </form>
+
+</div>

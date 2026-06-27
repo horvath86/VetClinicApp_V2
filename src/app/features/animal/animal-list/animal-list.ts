@@ -5,10 +5,11 @@ import { AnimalResponseDTO, AnimalService } from '../../../core/api/generated';
 import { Gender, Species } from '../../../core/enums/clinic-enums';
 import { TranslationService } from '../../../core/services/translation.service';
 import { Subscription } from 'rxjs';
+import { RouterLink, RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-animal-list',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink, RouterModule],
   templateUrl: './animal-list.html',
   styleUrl: './animal-list.scss',
 })
@@ -51,19 +52,9 @@ export class AnimalList implements OnInit, OnDestroy{
           this.cdr.detectChanges();
         },
         error: (err) => {
-          if(err.status === 403)
-          {
-            this.errorMessage = "err403";
-          }
-          else if(err.status === 0)
-          {
-            this.errorMessage = "err0";
-          }
-          else
-          {
-            this.errorMessage = "errGeneric";
-          }
-
+          if (err.status === 403) this.errorMessage = 'err403';
+          else if (err.status === 0) this.errorMessage = 'err0';
+          else this.errorMessage = 'errGeneric';
         }
       });
   }
