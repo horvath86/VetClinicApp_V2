@@ -45,7 +45,12 @@ export class TranslationService
             ownerIdRequired: "Owner's id is required.",
             save: "Save",
             saving: 'Saving...',
-            cancel: 'Cancel'
+            cancel: 'Cancel',
+            login: 'Login',
+            password: 'Password',
+            loginMessage: 'Please enter email and password to login',
+            errInvalidCredentials: 'Invalid email or password',
+            happyAnimalMessage: 'Helthy animal is happy animal'
         },
         sr: {
             appName: 'VetKlinika',
@@ -80,7 +85,12 @@ export class TranslationService
             ownerIdRequired: 'ID vlasnika je obavezan.',
             save: "Snimi",
             saving: 'Snima se...',
-            cancel: 'Odustani'
+            cancel: 'Odustani',
+            login: 'Prijava',
+            password: 'Šifra',
+            loginMessage: 'Molimo unesite email i šifru da se prijavite.',
+            errInvalidCredentials: 'Pogrešan email ili šifra',
+            happyAnimalMessage: 'Zdrava životinja je srećna životinja'
         }
     }
 

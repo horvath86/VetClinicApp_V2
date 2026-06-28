@@ -1,26 +1,30 @@
 <div class="login-container">
+    <div class="login-decoration">
+        <h1>{{translate.t.happyAnimalMessage}}</h1>
+        <img src="/logo.png" alt="VetClinic logo" class="logo-image">
+    </div>
     <div class="login-card">
-        <h2>Login</h2>
-        <p>Please enter email and password to login.</p>
+        <h2>{{translate.t.login}}</h2>
+        <p>{{translate.t.loginMessage}}</p>
 
         <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">{{translate.t.email}}: </label>
                 <input type="email" id="email" name="email" [(ngModel)]="loginCredentials.email" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">{{translate.t.password}}: </label>
                 <input type="password" id="password" name="password" [(ngModel)]="loginCredentials.password" required>
             </div>
 
             @if (errorMessage) 
             {
                 <div class="error-banner">
-                    {{ errorMessage }}
+                    {{ translate.getErrorMessage(errorMessage) }}
                 </div>
             }
 
-            <button type="submit" [disabled]="loginForm.invalid">Login</button>
+            <button type="submit" [disabled]="loginForm.invalid">{{translate.t.login}}</button>
         </form>
     </div>
 </div>
