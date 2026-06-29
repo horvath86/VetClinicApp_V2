@@ -125,3 +125,28 @@ select{
     color: #166534;
     
 }
+
+.card-actions{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 12px;
+
+    .delete-btn{
+        background-color: #fee2e2;
+        border: 1px solid #fca5a5;
+        color: #991b1b;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover{
+            background-color: #fca5a5;
+            color: #7f1d1d;
+        }
+    }
+}

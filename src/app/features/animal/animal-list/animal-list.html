@@ -38,6 +38,9 @@
                     <p><strong>{{translation.t.owner}}: </strong>{{animal.ownerName}}</p>
                     <span class="status-badge active">{{ translation.t.activeProfile }}</span>
                 </div>
+                <div class="card-actions">
+                    <button type="button" class="delete-btn" (click)="deletePatient(animal.id!, $event)">Delete</button>
+                </div>
             </div>
         }@empty{
             @if(!errorMessage){

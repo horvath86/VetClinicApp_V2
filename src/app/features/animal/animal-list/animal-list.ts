@@ -66,5 +66,30 @@ export class AnimalList implements OnInit, OnDestroy{
     }
   }
 
+  deletePatient(id: any, event: Event)
+  {
+    //stops click event from bubbling to parent
+    event.stopPropagation();
+
+    const confirmDelete = confirm('Are you sure you want to delete this patient record?');
+
+    if(!confirmDelete)
+    {
+      return;
+    }
+
+    const rawNumberId = id.id ? id.id : id;
+
+    this.animalService.deleteAnimal(rawNumberId).subscribe({
+      next: () => {
+        this.loadAnimals();
+      },
+      error: (err) => {
+        console.error("C# Backend Rejection Details:", err);
+        this.errorMessage = 'errGeneric';
+        this.cdr.detectChanges();
+      }
+    });
+  }
  
 }
