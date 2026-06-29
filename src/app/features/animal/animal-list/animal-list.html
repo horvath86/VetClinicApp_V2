@@ -39,7 +39,8 @@
                     <span class="status-badge active">{{ translation.t.activeProfile }}</span>
                 </div>
                 <div class="card-actions">
-                    <button type="button" class="delete-btn" (click)="deletePatient(animal.id!, $event)">Delete</button>
+                    <button type="button" class="edit-btn" [routerLink]="['/animals/edit', animal.id]">{{translation.t.edit}}</button>
+                    <button type="button" class="delete-btn" (click)="deletePatient(animal.id!, $event)">{{translation.t.delete}}</button>
                 </div>
             </div>
         }@empty{

@@ -50,7 +50,13 @@ export class TranslationService
             password: 'Password',
             loginMessage: 'Please enter email and password to login',
             errInvalidCredentials: 'Invalid email or password',
-            happyAnimalMessage: 'Helthy animal is happy animal'
+            happyAnimalMessage: 'Helthy animal is happy animal',
+            delete: 'Delete',
+            deleteConfirm: 'Are you sure you want to delete this profile?',
+            edit: "Edit",
+            chooseOwner: 'Select an owner',
+            addAnimal: 'Add patient',
+            editAnimal: 'Edit patient'
         },
         sr: {
             appName: 'VetKlinika',
@@ -90,7 +96,13 @@ export class TranslationService
             password: 'Šifra',
             loginMessage: 'Molimo unesite email i šifru da se prijavite.',
             errInvalidCredentials: 'Pogrešan email ili šifra',
-            happyAnimalMessage: 'Zdrava životinja je srećna životinja'
+            happyAnimalMessage: 'Zdrava životinja je srećna životinja',
+            delete: 'Obriši',
+            deleteConfirm: 'Da li ste sigurni da želite da obrišete ovaj profil?',
+            edit: "Ažuriraj",
+            chooseOwner: 'Izaberite vlasnika',
+            addAnimal: 'Dodaj pacijenta',
+            editAnimal: 'Ažuriraj pacijenta'
         }
     }
 

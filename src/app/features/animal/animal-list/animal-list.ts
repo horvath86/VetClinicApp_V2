@@ -70,8 +70,8 @@ export class AnimalList implements OnInit, OnDestroy{
   {
     //stops click event from bubbling to parent
     event.stopPropagation();
-
-    const confirmDelete = confirm('Are you sure you want to delete this patient record?');
+    const localizedMessage = this.translation.t.deleteConfirm;
+    const confirmDelete = confirm(localizedMessage);
 
     if(!confirmDelete)
     {

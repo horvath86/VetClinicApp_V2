@@ -7,6 +7,7 @@ import { TranslationService } from '../../../core/services/translation.service';
 import { AnimalCreateDTO } from '../../../core/api/generated/model/animalCreateDTO';
 import { AnimalService } from '../../../core/api/generated/api/animal.service';
 import { Subscription } from 'rxjs';
+import { OwnerService } from '../../../core/api/generated';
 
 @Component({
   selector: 'app-animal-create',
@@ -21,12 +22,14 @@ export class AnimalCreate implements OnInit, OnDestroy{
   errorMessage : string | null = null;
   isSaving: boolean = false;
 
+  ownersList: any[] = [];
+
   langSubscription: Subscription | null = null;
 
   speciesOptions = Object.values(Species).filter(v => typeof v === 'string') as string[];
   genderOptions = Object.values(Gender).filter(v => typeof v === 'string') as string[];
 
-  constructor(private animalService: AnimalService, private router: Router, public translate: TranslationService, private fb:FormBuilder, private cdr: ChangeDetectorRef){}
+  constructor(private ownerService: OwnerService,private animalService: AnimalService, private router: Router, public translate: TranslationService, private fb:FormBuilder, private cdr: ChangeDetectorRef){}
 
   ngOnInit(): void {
     this.patientForm = this.fb.group({
@@ -35,11 +38,26 @@ export class AnimalCreate implements OnInit, OnDestroy{
       species: [0, [Validators.required]],
       dateOfBirth: ['', [Validators.required]],
       gender: [0, [Validators.required]],
-      ownerId: [null, [Validators.required, Validators.min(1)]]
+      ownerId: [null, [Validators.required]]
     })
+
+    this.loadOwners();
 
     this.langSubscription = this.translate.LanguageChanged$.subscribe(() => {
       this.cdr.detectChanges();
+    });
+  }
+
+  loadOwners(): void {
+    this.ownerService.getOwners().subscribe({
+      next: (response: any) => {
+        // Unwraps custom OpenAPI objects safely if needed
+        this.ownersList = response.id ? [response] : response;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        console.error("Failed to populate active clinic owners lookup dropdown.");
+      }
     });
   }
 
