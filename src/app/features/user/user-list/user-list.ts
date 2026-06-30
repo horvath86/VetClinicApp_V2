@@ -15,6 +15,8 @@ import { Subscription } from 'rxjs';
 export class UserList implements OnInit, OnDestroy {
 
   users: UserResponseDTO[] = [];
+  
+  showDeleted: boolean = false;
 
   errorMessage: string | null = null;
 
@@ -40,12 +42,37 @@ export class UserList implements OnInit, OnDestroy {
 
     const roleFilter = this.selectedRole !== null ? this.selectedRole : undefined;
 
-    this.userService.getUsers(roleFilter as any).subscribe({
-      next: (data) => {
+
+    //manually creating url because selecting inactive users is getting ignored othervise
+    const requestObservable = this.userService.getUsers(roleFilter);
+
+    const nativeRequest = (requestObservable as any)._subscribe ? requestObservable : requestObservable;
+
+    if((this.userService as any).configuration)
+    {
+
+    }
+
+    const basePath = (this.userService as any).configuration?.basePath || 'https://localhost:7177';
+    let targetUrl = `${basePath}/api/User`;
+
+    const queryParams: string[] = [];
+    if(roleFilter !== undefined) queryParams.push(`role=${roleFilter}`);
+    if(this.showDeleted) queryParams.push(`includeDeleted=true`)
+
+    if(queryParams.length>0)
+    {
+      targetUrl +=`?${queryParams.join('&')}`;
+    }  
+
+    const http = (this.userService as any).httpClient;
+
+    http.get(targetUrl).subscribe({
+      next: (data: UserResponseDTO[]) => {
         this.users = data;
         this.cdr.detectChanges();
       },
-      error: (err) => {
+      error: (err: any) => {
         if (err.status === 403) this.errorMessage = 'err403';
         else if (err.status === 0) this.errorMessage = 'err0';
         else this.errorMessage = 'errGeneric';
@@ -60,5 +87,11 @@ export class UserList implements OnInit, OnDestroy {
     {
       this.langSubscription.unsubscribe();
     }
+  }
+
+  toggleDeletedStaff(event: Event): void{
+    const input = event.target as HTMLInputElement;
+    this.showDeleted = input.checked;
+    this.loadUsers();
   }
 }

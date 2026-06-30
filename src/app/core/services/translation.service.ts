@@ -56,7 +56,9 @@ export class TranslationService
             edit: "Edit",
             chooseOwner: 'Select an owner',
             addAnimal: 'Add patient',
-            editAnimal: 'Edit patient'
+            editAnimal: 'Edit patient',
+            inactiveProfile: "Inactive profile",
+            showInactiveMessage: "Show Inactive Staff"
         },
         sr: {
             appName: 'VetKlinika',
@@ -102,7 +104,10 @@ export class TranslationService
             edit: "Ažuriraj",
             chooseOwner: 'Izaberite vlasnika',
             addAnimal: 'Dodaj pacijenta',
-            editAnimal: 'Ažuriraj pacijenta'
+            editAnimal: 'Ažuriraj pacijenta',
+            inactiveProfile: "Neaktivan profil",
+            showInactiveMessage: "Prikaži neaktivno osoblje"
+            
         }
     }
 

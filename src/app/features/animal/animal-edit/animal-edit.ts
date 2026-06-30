@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AnimalService, OwnerService } from '../../../core/api/generated';
+import { AnimalResponseDTO, AnimalService, OwnerResponseDTO, OwnerService } from '../../../core/api/generated';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationService } from '../../../core/services/translation.service';
 import { Subscription } from 'rxjs';
@@ -20,7 +20,7 @@ export class AnimalEdit implements OnInit, OnDestroy{
   isSaving: boolean = false;
   animalId!: number;
 
-  ownerList: any[] = [];
+  ownerList: OwnerResponseDTO[] = [];
 
   private langSubscription: Subscription | null = null;
   speciesOptions = Object.values(Species).filter(v => typeof v === 'string') as string[];
@@ -62,9 +62,8 @@ export class AnimalEdit implements OnInit, OnDestroy{
 
   loadOwners(): void {
     this.ownerService.getOwners().subscribe({
-      next: (response: any) => {
-        //Unwraps custom OpenAPI objects safely if needed
-        this.ownerList = response.id ? [response] : response;
+      next: (response: OwnerResponseDTO[]) => {
+        this.ownerList = response;
         this.cdr.detectChanges();
       },
       error: () => {
@@ -75,9 +74,9 @@ export class AnimalEdit implements OnInit, OnDestroy{
 
   loadExistingPatientData(): void {
     this.animalService.getAnimalById(this.animalId as any).subscribe({
-      next:(animal: any) => {
-        //handles both wrapped openapi models and direct entities natively
-        const data = animal.id ? animal : animal;
+      next:(animal: AnimalResponseDTO) => {
+      
+        const data = animal;
 
         this.patientForm.patchValue({
           name: data.name,

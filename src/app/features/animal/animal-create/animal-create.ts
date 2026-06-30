@@ -7,7 +7,7 @@ import { TranslationService } from '../../../core/services/translation.service';
 import { AnimalCreateDTO } from '../../../core/api/generated/model/animalCreateDTO';
 import { AnimalService } from '../../../core/api/generated/api/animal.service';
 import { Subscription } from 'rxjs';
-import { OwnerService } from '../../../core/api/generated';
+import { OwnerResponseDTO, OwnerService } from '../../../core/api/generated';
 
 @Component({
   selector: 'app-animal-create',
@@ -22,7 +22,7 @@ export class AnimalCreate implements OnInit, OnDestroy{
   errorMessage : string | null = null;
   isSaving: boolean = false;
 
-  ownersList: any[] = [];
+  ownersList: OwnerResponseDTO[] = [];
 
   langSubscription: Subscription | null = null;
 
@@ -50,9 +50,8 @@ export class AnimalCreate implements OnInit, OnDestroy{
 
   loadOwners(): void {
     this.ownerService.getOwners().subscribe({
-      next: (response: any) => {
-        // Unwraps custom OpenAPI objects safely if needed
-        this.ownersList = response.id ? [response] : response;
+      next: (response: OwnerResponseDTO[]) => {
+        this.ownersList = response;
         this.cdr.detectChanges();
       },
       error: () => {

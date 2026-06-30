@@ -11,7 +11,19 @@
                 <option [ngValue]="i">{{roleName}}</option>
             }
         </select>
+
+       <div class="inactiveStaff">
+            <input 
+                type="checkbox" 
+                id="showDeletedCheck" 
+                [checked]="showDeleted" 
+                (change)="toggleDeletedStaff($event)"
+            >
+            <label for="showDeletedCheck">{{translate.t.showInactiveMessage}}</label>
+       </div>
+  
     </div>
+    
 
     @if(errorMessage)
     {
@@ -29,7 +41,14 @@
                     <p><strong>{{translate.t.licenceNumber}}: </strong>{{user.licenceNumber}}</p>
                     <p><strong>{{translate.t.phone}}: </strong>{{user.phone}}</p>
                     <p><strong>{{translate.t.email}}: </strong>{{user.email}}</p>
-                    <span class="status-badge active">{{ translate.t.activeProfile }}</span>
+                    @if(user.isActive)
+                    {
+                        <span class="status-badge-active">{{ translate.t.activeProfile }}</span>
+                    }
+                    @else 
+                    {
+                        <span class="status-badge-inactive">{{ translate.t.inactiveProfile }}</span>
+                    }
                 </div>
             </div>
         }@empty{
