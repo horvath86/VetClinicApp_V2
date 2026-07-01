@@ -5,10 +5,11 @@ import { UserService, UserResponseDTO } from '../../../core/api/generated';
 import { TranslationService } from '../../../core/services/translation.service';
 import { Role } from '../../../core/enums/clinic-enums';
 import { Subscription } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './user-list.html',
   styleUrl: './user-list.scss',
 })

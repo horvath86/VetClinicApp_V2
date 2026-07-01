@@ -55,7 +55,7 @@ export class AnimalCreate implements OnInit, OnDestroy{
         this.cdr.detectChanges();
       },
       error: () => {
-        console.error("Failed to populate active clinic owners lookup dropdown.");
+        console.error("Failed to populate active clinic owners dropdown.");
       }
     });
   }

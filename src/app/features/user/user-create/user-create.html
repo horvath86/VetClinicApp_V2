@@ -1,0 +1,131 @@
+<div class=" form-container">
+    <header class="form-header">
+        <h1>{{translate.t.registerUser}}</h1>
+    </header>
+
+    <form [formGroup]="userForm" (ngSubmit)="saveUser()" class="clinic-form">
+        <div class="form-group">
+            <label><strong>{{translate.t.name}}: </strong></label>
+            <input type="text" formControlName="name" maxlength="100" autocomplete="off">
+
+            @if(getControl('name')?.invalid && (getControl('name')?.touched || getControl('name')?.dirty))
+            {
+                @if(getControl('name')?.hasError('required'))
+                {
+                    <div class="input-error">{{translate.t.nameRequired}}</div>
+                }
+                @if(getControl('name')?.hasError('maxlength'))
+                {
+                    <div class="input-error">{{translate.t.nameTooLong}}</div>
+                }
+            }
+        </div>
+
+        <div class="form-group">
+            <label><strong>{{translate.t.phone}}: </strong></label>
+            <input type="text" formControlName="phone" maxlength="20" autocomplete="off">
+
+            @if(getControl('phone')?.invalid && (getControl('phone')?.touched || getControl('phone')?.dirty))
+            {
+                @if(getControl('phone')?.hasError('required'))
+                {
+                    <div class="input-error">{{translate.t.phoneRequired}}</div>
+                }
+                @if(getControl('phone')?.hasError('maxlength'))
+                {
+                    <div class="input-error">{{translate.t.phoneTooLong}}</div>
+                }
+            }
+        </div>
+
+        <div class="form-group">
+            <label><strong>{{translate.t.email}}: </strong></label>
+            <input type="email" formControlName="email" maxlength="254" autocomplete="off">
+
+            @if(getControl('email')?.invalid && (getControl('email')?.touched || getControl('email')?.dirty))
+            {
+                @if(getControl('email')?.hasError('required'))
+                {
+                    <div class="input-error">{{translate.t.emailRequired}}</div>
+                }
+                @if(getControl('email')?.hasError('maxlength'))
+                {
+                    <div class="input-error">{{translate.t.emailTooLong}}</div>
+                }
+                @if (getControl('email')?.hasError('email')) 
+                {
+                    <div class="input-error">{{translate.t.emailFormat}}</div>
+                }
+            }
+        </div>
+
+        <div class="form-group">
+            <label><strong>{{translate.t.licenceNumber}}: </strong></label>
+            <input type="text" formControlName="licenceNumber" maxlength="4" autocomplete="off" [placeholder]="getControl('licenceNumber')?.disabled ? translate.t.licenceNotRequired : translate.t.fourDigits">
+            
+            @if(getControl('licenceNumber')?.invalid && (getControl('licenceNumber')?.touched || getControl('licenceNumber')?.dirty))
+            {
+                @if(getControl('licenceNumber')?.hasError('required'))
+                {
+                    <div class="input-error">{{translate.t.licenceRequired}}</div>
+                }
+                @if(getControl('licenceNumber')?.hasError('maxlength'))
+                {
+                    <div class="input-error">{{translate.t.fourDigits}}</div>
+                }
+                @if(getControl('licenceNumber')?.hasError('minlength'))
+                {
+                    <div class="input-error">{{translate.t.fourDigits}}</div>
+                }
+            }
+        </div>
+
+        <div class="form-group">
+            <label><strong>{{ translate.t.password }}: </strong></label>
+            <input type="password" formControlName="password" maxlength="50">
+            @if(getControl('password')?.invalid && (getControl('password')?.touched || getControl('password')?.dirty))
+            {
+                @if(getControl('password')?.hasError('required'))
+                {
+                    <div class="input-error">{{translate.t.passRequired}}</div>
+                }
+                @if(getControl('password')?.hasError('maxlength'))
+                {
+                    <div class="input-error">{{translate.t.passLong}}</div>
+                }
+                @if(getControl('password')?.hasError('minlength'))
+                {
+                    <div class="input-error">{{translate.t.passShort}}</div>
+                }
+            }
+        </div>
+
+        
+        <div class="form-group">
+            <label><strong>{{ translate.t.confirmPassword}}: </strong></label>
+            <input type="password" formControlName="confirmPassword" maxlength="50">
+    
+      
+            @if (userForm.hasError('passwordMismatch') && (getControl('confirmPassword')?.touched || getControl('password')?.touched)) {
+                <div class="input-error">{{translate.t.passwordsDoNotMatch}}</div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label><strong>{{ translate.t.role }}:</strong></label>
+            
+            <select formControlName="role">
+                @for (roleName of roleOptions; track roleName; let i = $index) {
+                    <option [ngValue]="i">{{roleName}}</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="submit-btn" [disabled]="isSaving">
+                {{ isSaving ? translate.t.saving : translate.t.save }}
+            </button>
+            <button type="button" class="cancel-btn" (click)="cancel()">{{translate.t.cancel}}</button>
+        </div>
+    </form>
+</div>

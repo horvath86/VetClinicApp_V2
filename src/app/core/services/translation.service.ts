@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { email } from '@angular/forms/signals';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -58,7 +59,25 @@ export class TranslationService
             addAnimal: 'Add patient',
             editAnimal: 'Edit patient',
             inactiveProfile: "Inactive profile",
-            showInactiveMessage: "Show Inactive Staff"
+            showInactiveMessage: "Show Inactive Staff",
+            registerUser: 'Register user',
+            phoneRequired: 'Phone is required',
+            phoneTooLong: 'Phone is too long',
+            emailTooLong: 'Email is too long',
+            emailRequired: 'Email is required',
+            emailFormat: 'Email is in wrong format',
+            licenceNotRequired: 'Not required for this role',
+            fourDigits: "Must be exactly 4 characters",
+            licenceRequired: 'Licence is required',
+            addUser: 'Add user',
+            confirmPassword: 'Confirm password',
+            passwordsDoNotMatch: "Passwords do not match",
+            chooseRole: 'Choose a role',
+            passShort: 'Password too short',
+            passLong: 'Password too long',
+            passRequired: "Password required"
+
+
         },
         sr: {
             appName: 'VetKlinika',
@@ -106,7 +125,24 @@ export class TranslationService
             addAnimal: 'Dodaj pacijenta',
             editAnimal: 'Ažuriraj pacijenta',
             inactiveProfile: "Neaktivan profil",
-            showInactiveMessage: "Prikaži neaktivno osoblje"
+            showInactiveMessage: "Prikaži neaktivno osoblje",
+            registerUser: 'Registruj korisnika',
+            phoneRequired: 'Broj telefona je obavezan',
+            phoneTooLong: 'Broj telefona je predugačak',
+            emailTooLong: 'Email je predugacak',
+            emailRequired: 'Email je obavezan',
+            emailFormat: 'Email je u pogrešnom formatu',
+            licenceNotRequired: 'Nije potrebna za ovu ulogu',
+            fourDigits: "Mora biti tačno 4 karaktera",
+            licenceRequired: 'Licenca je obavezna',
+            addUser: 'Dodaj korisnika',
+            confirmPassword: 'Potvrdite šifru',
+            passwordsDoNotMatch: "Šifre se ne podudaraju",
+            chooseRole: 'Izaberite ulogu',
+            passShort: 'Šifra prekratka',
+            passLong: 'Šifra predugačka',
+            passRequired: "Šifra je obavezna"
+
             
         }
     }
