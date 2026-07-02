@@ -95,4 +95,30 @@ export class UserList implements OnInit, OnDestroy {
     this.showDeleted = input.checked;
     this.loadUsers();
   }
+
+  deleteUser(id: any, event: Event)
+  {
+    //stops click event from bubbling to parent
+    event.stopPropagation();
+    const localizedMessage = this.translate.t.deleteConfirm;
+    const confirmDelete = confirm(localizedMessage);
+
+    if(!confirmDelete)
+    {
+      return;
+    }
+
+    const rawNumberId = id.id ? id.id : id;
+
+    this.userService.deleteUser(rawNumberId).subscribe({
+      next: () => {
+        this.loadUsers();
+      },
+      error: (err) => {
+        console.error("C# Backend Rejection Details:", err);
+        this.errorMessage = 'errGeneric';
+        this.cdr.detectChanges();
+      }
+    });
+  }
 }

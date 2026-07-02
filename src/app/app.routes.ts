@@ -6,6 +6,7 @@ import { AnimalCreate } from './features/animal/animal-create/animal-create';
 import { authGuard } from './core/guards/auth-guard';
 import { AnimalEdit } from './features/animal/animal-edit/animal-edit';
 import { UserCreate } from './features/user/user-create/user-create';
+import { UserEdit } from './features/user/user-edit/user-edit';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -15,5 +16,6 @@ export const routes: Routes = [
     {path: 'animals/edit/:id', component: AnimalEdit, canActivate: [authGuard]},
     {path: 'users', component: UserList, canActivate: [authGuard]},
     {path: 'users/create', component: UserCreate, canActivate: [authGuard]},
+    {path: 'users/edit/:id', component: UserEdit, canActivate: [authGuard]},
     {path: '**', redirectTo: 'login'}
 ];

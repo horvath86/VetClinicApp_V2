@@ -51,6 +51,10 @@
                         <span class="status-badge-inactive">{{ translate.t.inactiveProfile }}</span>
                     }
                 </div>
+                <div class="card-actions">
+                    <button type="button" class="edit-btn" [routerLink]="['/users/edit', user.id]">{{translate.t.edit}}</button>
+                    <button type="button" class="delete-btn" (click)="deleteUser(user.id!, $event)">{{translate.t.delete}}</button>
+                </div>
             </div>
         }@empty{
             @if(!errorMessage){

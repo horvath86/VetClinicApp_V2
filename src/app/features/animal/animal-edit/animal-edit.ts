@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AnimalResponseDTO, AnimalService, OwnerResponseDTO, OwnerService } from '../../../core/api/generated';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, isActive, Router } from '@angular/router';
 import { TranslationService } from '../../../core/services/translation.service';
 import { Subscription } from 'rxjs';
 import { Gender, Species } from '../../../core/enums/clinic-enums';
