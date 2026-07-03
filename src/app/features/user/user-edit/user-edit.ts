@@ -163,7 +163,10 @@ export class UserEdit implements OnInit, OnDestroy{
         this.isSaving = false;
         if (err.status === 403) this.errorMessage = 'err403';
         else if (err.status === 0) this.errorMessage = 'err0';
+        else if (err.status === 400) this.errorMessage = 'err400';
+        else if (err.status === 409) this.errorMessage = 'err409';
         else this.errorMessage = 'errGeneric';
+        this.cdr.detectChanges();
       }
     });
   }

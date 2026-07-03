@@ -3,6 +3,13 @@
         <h1>{{translate.t.addAnimal}}</h1>
     </header>
 
+    @if(errorMessage)
+    {
+        <div class="error-banner">
+            <p>{{translate.getErrorMessage(errorMessage)}}</p>
+        </div>
+    }
+
     <form [formGroup]="patientForm" (ngSubmit)="savePatient()" class="clinic-form">
         <div class="form-group">
             <label><strong>{{translate.t.name}}: </strong></label>

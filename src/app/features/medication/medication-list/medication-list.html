@@ -1,0 +1,59 @@
+<div class="user-dashboard">
+    <header class="dashboard-header">
+        <h1>{{translate.t.medications || 'Medications'}}</h1>
+        <button class="add-btn" routerLink="/medications/create">+{{translate.t.addMedication || 'Add Medication'}}</button>
+    </header>
+
+    <div class="filter-bar">
+        <input 
+            type="text" 
+            [placeholder]="translate.t.searchPlaceholder" 
+            [(ngModel)]="searchTerm" 
+            (input)="loadMedication()"
+        >
+
+    </div>
+    
+    @if(errorMessage)
+    {
+        <div class="error-banner">
+            <p>{{translate.getErrorMessage(errorMessage)}}</p>
+        </div>
+    }
+
+    <div class="grid-container">
+        @for (med of medications; track med.id) 
+        {
+            <div class="medication-card" [class.expanded]="med.isExpanded">
+                <h3 class="medication-name" [class.show-all]="med.isExpanded">
+                    {{med.name}}
+                </h3>
+                
+                <div class="card-details">
+                    <p><strong>{{translate.t.code}}: </strong>{{med.code}}</p>
+                    
+                    <p class="med-description" [class.show-all]="med.isExpanded">
+                        <strong>{{translate.t.species || 'Description'}}: </strong>{{med.description}}
+                    </p>
+                    <span class="status-badge">{{ translate.t.activeProfile }}</span>
+                </div>
+
+                @if ((med.name && med.name.length > 45) || (med.description && med.description.length > 60)) {
+                    <button type="button" class="btn-toggle-text" (click)="toggleExpand(med)">
+                        {{ med.isExpanded ? translate.t.showLess : translate.t.showMore }}
+                    </button>
+                }
+
+                <div class="card-actions">
+                    
+                </div>
+            </div>
+        }@empty{
+            @if(!errorMessage){
+                <div class="no-records">
+                    <p>{{translate.t.noRecords}}</p>
+                </div>
+            }
+        }
+    </div>
+</div>

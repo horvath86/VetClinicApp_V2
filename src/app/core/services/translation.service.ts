@@ -43,7 +43,7 @@ export class TranslationService
             codeRequired: 'Code is required.',
             codeTooLong: 'Code is too long. (max 20 characters)',
             dobRequired: 'Date of birth is required.',
-            ownerIdRequired: "Owner's id is required.",
+            ownerIdRequired: "Owner's name is required.",
             save: "Save",
             saving: 'Saving...',
             cancel: 'Cancel',
@@ -75,7 +75,13 @@ export class TranslationService
             chooseRole: 'Choose a role',
             passShort: 'Password too short',
             passLong: 'Password too long',
-            passRequired: "Password required"
+            passRequired: "Password required",
+            medications: 'Medications',
+            showMore: 'Show more',
+            showLess: 'Show less',
+            addMedication: 'Add Medication',
+            err409: 'Code or licence must be unique',
+            err400: "Email must be unique"
 
 
         },
@@ -109,7 +115,7 @@ export class TranslationService
             codeRequired: 'Kod je obavezan.',
             codeTooLong: 'Kod je predugačak. (max 20 karaktera)',
             dobRequired: 'Datum rođenja je obavezan.',
-            ownerIdRequired: 'ID vlasnika je obavezan.',
+            ownerIdRequired: 'Ime vlasnika je obavezan.',
             save: "Snimi",
             saving: 'Snima se...',
             cancel: 'Odustani',
@@ -141,7 +147,13 @@ export class TranslationService
             chooseRole: 'Izaberite ulogu',
             passShort: 'Šifra prekratka',
             passLong: 'Šifra predugačka',
-            passRequired: "Šifra je obavezna"
+            passRequired: "Šifra je obavezna",
+            medications: 'Lekovi',
+            showMore: 'Prikaži više',
+            showLess: 'Prikaži manje',
+            addMedication: 'Dodaj lek',
+            err409: 'Kod ili licenca moraju biti jedinstveni',
+            err400: "Email mora biti jedinstven"
 
             
         }

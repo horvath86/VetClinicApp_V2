@@ -3,6 +3,13 @@
         <h1>{{translate.t.registerUser}}</h1>
     </header>
 
+    @if(errorMessage)
+    {
+        <div class="error-banner">
+            <p>{{translate.getErrorMessage(errorMessage)}}</p>
+        </div>
+    }
+
     <form [formGroup]="userForm" (ngSubmit)="saveUser()" class="clinic-form">
         <div class="form-group">
             <label><strong>{{translate.t.name}}: </strong></label>

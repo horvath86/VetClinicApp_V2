@@ -149,10 +149,16 @@ export class UserCreate implements OnInit, OnDestroy{
         this.router.navigate(['/users'])
       },
       error: (err) => {
+        console.log("Error callback entered");
         this.isSaving = false;
+        console.log("isSaving:", this.isSaving);
         if (err.status === 403) this.errorMessage = 'err403';
         else if (err.status === 0) this.errorMessage = 'err0';
+        else if (err.status === 400) this.errorMessage = 'err400';
+        else if (err.status === 409) this.errorMessage = 'err409';
         else this.errorMessage = 'errGeneric';
+        this.cdr.detectChanges();
+
       }
     });
   }
