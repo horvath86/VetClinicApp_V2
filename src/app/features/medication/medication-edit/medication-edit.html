@@ -1,6 +1,6 @@
 <div class="form-container">
     <header class="form-header">
-        <h1>{{translate.t.addMedication}}</h1>
+        <h1>{{translate.t.updateMedication}}</h1>
     </header>
 
     @if(errorMessage)
@@ -10,7 +10,7 @@
         </div>
     }
 
-    <form [formGroup]="medicationForm" (ngSubmit)="saveMedication()" class="clinic-form">
+    <form [formGroup]="medicationForm" (ngSubmit)="updateMedication()" class="clinic-form">
 
         <div class="form-group">
             <label><strong>{{translate.t.code}}: </strong></label>

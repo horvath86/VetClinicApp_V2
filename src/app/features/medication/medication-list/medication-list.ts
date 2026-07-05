@@ -4,6 +4,7 @@ import { Medication, MedicationService } from '../../../core/api/generated';
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../../core/services/translation.service';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 interface MedicationVM extends Medication
 {
@@ -12,7 +13,7 @@ interface MedicationVM extends Medication
 
 @Component({
   selector: 'app-medication-list',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './medication-list.html',
   styleUrl: './medication-list.scss',
 })
@@ -43,7 +44,13 @@ export class MedicationList implements OnInit, OnDestroy
 
     this.medicationService.getMedications(this.searchTerm || undefined).subscribe({
       next: (data: Medication[]) => {
-        this.medications = data.map(med => ({...med, isExpanded: false}));
+        this.medications = data.map(med => {
+          const clonedMed = JSON.parse(JSON.stringify(med));
+          return {
+            ...clonedMed,
+            isExpanded:false
+          };
+        });
         this.cdr.detectChanges();
       },
       error: (err: any) => {
@@ -64,5 +71,31 @@ export class MedicationList implements OnInit, OnDestroy
   toggleExpand(med: MedicationVM): void {
     med.isExpanded = !med.isExpanded;
     this.cdr.detectChanges();
+  }
+
+  deleteMedication(id: any, event: Event)
+  {
+    //stops click event from bubbling to parent
+    event.stopPropagation();
+    const localizedMessage = this.translate.t.deleteConfirm;
+    const confirmDelete = confirm(localizedMessage);
+
+    if(!confirmDelete)
+    {
+      return;
+    }
+
+    const rawNumberId = id.id ? id.id : id;
+
+    this.medicationService.deleteMedication(rawNumberId).subscribe({
+      next: () => {
+        this.loadMedication();
+      },
+      error: (err) => {
+        console.error("C# Backend Rejection Details:", err);
+        this.errorMessage = 'errGeneric';
+        this.cdr.detectChanges();
+      }
+    });
   }
 }

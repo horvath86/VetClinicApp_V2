@@ -81,7 +81,9 @@ export class TranslationService
             showLess: 'Show less',
             addMedication: 'Add Medication',
             err409: 'Code or licence must be unique',
-            err400: "Email must be unique"
+            err400: "Email must be unique",
+            description: 'Description',
+            updateMedication: 'Update medication'
 
 
         },
@@ -153,7 +155,9 @@ export class TranslationService
             showLess: 'Prikaži manje',
             addMedication: 'Dodaj lek',
             err409: 'Kod ili licenca moraju biti jedinstveni',
-            err400: "Email mora biti jedinstven"
+            err400: "Email mora biti jedinstven",
+            description: 'Opis',
+            updateMedication: 'Ažuriraj lek'
 
             
         }

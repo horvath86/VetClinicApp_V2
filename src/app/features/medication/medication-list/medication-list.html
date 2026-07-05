@@ -25,15 +25,17 @@
         @for (med of medications; track med.id) 
         {
             <div class="medication-card" [class.expanded]="med.isExpanded">
-                <h3 class="medication-name" [class.show-all]="med.isExpanded">
-                    {{med.name}}
-                </h3>
+                <div class="card-header-block">
+                    <h3 class="medication-name" [class.show-all]="med.isExpanded">
+                        {{med.name}}
+                    </h3>
+                </div>
                 
                 <div class="card-details">
                     <p><strong>{{translate.t.code}}: </strong>{{med.code}}</p>
                     
                     <p class="med-description" [class.show-all]="med.isExpanded">
-                        <strong>{{translate.t.species || 'Description'}}: </strong>{{med.description}}
+                        <strong>{{translate.t.description}}: </strong>{{med.description}}
                     </p>
                     <span class="status-badge">{{ translate.t.activeProfile }}</span>
                 </div>
@@ -45,7 +47,8 @@
                 }
 
                 <div class="card-actions">
-                    
+                    <button type="button" class="edit-btn" [routerLink]="['/medications/edit', med.id]">{{translate.t.edit}}</button>
+                    <button type="button" class="delete-btn" (click)="deleteMedication(med.id!, $event)">{{translate.t.delete}}</button>
                 </div>
             </div>
         }@empty{
