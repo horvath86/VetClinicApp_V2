@@ -1,5 +1,5 @@
 
-**This is the frontend user interface for the Vet Clinic application, built using Angular.**
+## This is the frontend user interface for the Vet Clinic application, built using Angular.
 
 It lets Admins register new staff. 
 Veterinarians create and track patients, their medical history like procedures and prescriptions. 
