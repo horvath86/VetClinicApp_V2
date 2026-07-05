@@ -5,7 +5,8 @@ It lets Admins register new staff.
 Veterinarians create and track patients, their medical history like procedures and prescriptions. 
 Receptionists can make appointments with the veterinarians.
 
-Version 2 focuses on making the interface look clean and supporting multiple languages.
+While Version 1 was just a basic prototype to see if I could make basic user interface using Bootstrap,
+version 2 focuses on making the interface look clean using SCSS and supporting multiple languages.
 
 * **Framework:** Angular (using modern Standalone Components)
 * **Styling:** HTML5 and SCSS
