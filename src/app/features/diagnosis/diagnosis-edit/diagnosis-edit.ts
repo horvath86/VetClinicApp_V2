@@ -1,28 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Diagnosis, DiagnosisService } from '../../../core/api/generated';
 import { Subscription } from 'rxjs';
-import { Medication, MedicationService } from '../../../core/api/generated';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationService } from '../../../core/services/translation.service';
 
 @Component({
-  selector: 'app-medication-edit',
+  selector: 'app-diagnosis-edit',
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './medication-edit.html',
-  styleUrl: './medication-edit.scss',
+  templateUrl: './diagnosis-edit.html',
+  styleUrl: './diagnosis-edit.scss',
 })
-export class MedicationEdit implements OnInit, OnDestroy
+export class DiagnosisEdit implements OnInit, OnDestroy
 {
-  medicationForm!: FormGroup;
+  diagnosisForm!: FormGroup;
   errorMessage: string | null = null;
   isSaving: boolean = false;
-  medicationId!: number;
+  diagnosisId!: number;
 
   private langSubscription: Subscription | null = null;
 
   constructor(
-    private medicationService: MedicationService,
+    private diagnosisService: DiagnosisService,
     private router: Router,
     private route: ActivatedRoute,
     public translate: TranslationService,
@@ -31,18 +31,17 @@ export class MedicationEdit implements OnInit, OnDestroy
   ){}
 
   ngOnInit(): void {
-    this.medicationForm = this.fb.group({
+    this.diagnosisForm = this.fb.group({
       code: ['', [Validators.required, Validators.maxLength(10)]],
-      name: ['', [Validators.required, Validators.maxLength(150)]],
-      description: ['', [Validators.required, Validators.maxLength(250)]]
+      name: ['', [Validators.required, Validators.maxLength(200)]]
     });
 
     const idParam = this.route.snapshot.paramMap.get('id');
     if(idParam)
     {
       
-      this.medicationId = Number(idParam);
-      this.loadExistingMedicationData();
+      this.diagnosisId = Number(idParam);
+      this.loadExistingDiagnosisData();
     }
 
     this.langSubscription = this.translate.LanguageChanged$.subscribe(() => {
@@ -50,16 +49,15 @@ export class MedicationEdit implements OnInit, OnDestroy
     });
   }
 
-  loadExistingMedicationData(): void {
-    this.medicationService.getMedicationById(this.medicationId as any).subscribe({
-          next:(medication: Medication) => {
+  loadExistingDiagnosisData(): void {
+    this.diagnosisService.getDiagnosisById(this.diagnosisId as any).subscribe({
+          next:(diagnosis: Diagnosis) => {
           
-            const data = medication;
+            const data = diagnosis;
     
-            this.medicationForm.patchValue({
+            this.diagnosisForm.patchValue({
               name: data.name,
               code: data.code,
-              description: data.description
             });
             this.cdr.detectChanges();
           },
@@ -70,29 +68,28 @@ export class MedicationEdit implements OnInit, OnDestroy
         });
   }
 
-  updateMedication(): void {
-    if(this.medicationForm.invalid)
+  updateDiagnosis(): void {
+    if(this.diagnosisForm.invalid)
     {
-      this.medicationForm.markAllAsTouched();
+      this.diagnosisForm.markAllAsTouched();
       return;
     }
 
     this.errorMessage = null;
     this.isSaving = true;
 
-    const formValue = this.medicationForm.value;
+    const formValue = this.diagnosisForm.value;
 
     const payload = {
-      id: this.medicationId,
+      id: this.diagnosisId,
       code: formValue.code,
-      name: formValue.name,
-      description: formValue.description
+      name: formValue.name
     }
 
-    this.medicationService.updateMedication(payload as any).subscribe({
+    this.diagnosisService.updateDiagnosis(payload as any).subscribe({
       next: () => {
         this.isSaving = false;
-        this.router.navigate(['/medications']); 
+        this.router.navigate(['/diagnoses']); 
       },
       error: (err) => {
         this.isSaving = false;
@@ -106,11 +103,11 @@ export class MedicationEdit implements OnInit, OnDestroy
   }
 
   getControl(name: string) {
-    return this.medicationForm.get(name);
+    return this.diagnosisForm.get(name);
   }
 
   cancel(): void {
-    this.router.navigate(['/medications']);
+    this.router.navigate(['/diagnoses']);
   }
 
   ngOnDestroy(): void {

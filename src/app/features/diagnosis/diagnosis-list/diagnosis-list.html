@@ -1,0 +1,58 @@
+<div class="user-dashboard">
+    <header class="dashboard-header">
+        <h1>{{translate.t.diagnoses}}</h1>
+        <button class="add-btn" routerLink="/diagnoses/create">+{{translate.t.addDiagnose}}</button>
+    </header>
+
+    <div class="filter-bar">
+        <input 
+            type="text" 
+            [placeholder]="translate.t.searchPlaceholder" 
+            [(ngModel)]="searchTerm" 
+            (input)="loadDiagnoses()"
+        >
+
+    </div>
+    
+    @if(errorMessage)
+    {
+        <div class="error-banner">
+            <p>{{translate.getErrorMessage(errorMessage)}}</p>
+        </div>
+    }
+
+    <div class="grid-container">
+        @for (diag of diagnoses; track diag.id) 
+        {
+            <div class="diagnosis-card" [class.expanded]="diag.isExpanded">
+                <div class="card-header-block">
+                    <h3 class="diagnosis-name" [class.show-all]="diag.isExpanded">
+                        {{diag.name}}
+                    </h3>
+                </div>
+                
+                <div class="card-details">
+                    <p><strong>{{translate.t.code}}: </strong>{{diag.code}}</p>
+                    <span class="status-badge">{{ translate.t.activeProfile }}</span>
+                </div>
+
+                @if ((diag.name && diag.name.length > 45)) {
+                    <button type="button" class="btn-toggle-text" (click)="toggleExpand(diag)">
+                        {{ diag.isExpanded ? translate.t.showLess : translate.t.showMore }}
+                    </button>
+                }
+
+                <div class="card-actions">
+                    <button type="button" class="edit-btn" [routerLink]="['/diagnoses/edit', diag.id]">{{translate.t.edit}}</button>
+                    <button type="button" class="delete-btn" (click)="deleteDiagnosis(diag.id!, $event)">{{translate.t.delete}}</button>
+                </div>
+            </div>
+        }@empty{
+            @if(!errorMessage){
+                <div class="no-records">
+                    <p>{{translate.t.noRecords}}</p>
+                </div>
+            }
+        }
+    </div>
+</div>

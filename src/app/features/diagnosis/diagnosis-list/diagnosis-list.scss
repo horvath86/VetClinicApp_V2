@@ -8,7 +8,7 @@
 }
 
 .dashboard-header {
-    margin-bottom: 32px;
+   margin-bottom: 32px;
     border-bottom: 2px solid #e2e8f0;
     padding-bottom: 12px;
 
@@ -53,7 +53,7 @@ input[type="text"] {
     align-items: stretch; 
 }
 
-.medication-card {
+.diagnosis-card {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
@@ -82,7 +82,7 @@ input[type="text"] {
         margin-bottom: 12px;
     }
 
-    h3.medication-name {
+    h3.diagnosis-name {
         font-size: 1.25rem;
         color: #0f172a;
         margin: 0;
@@ -120,23 +120,6 @@ input[type="text"] {
         strong {
             color: #334155;
             font-weight: 600;
-        }
-    }
-
-    .med-description {
-        line-height: 1.5;
-        max-height: 44px;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        line-clamp: 2;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        &.show-all {
-            display: block;
-            overflow: visible;
-            max-height: none;
         }
     }
 }

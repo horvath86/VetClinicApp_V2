@@ -83,7 +83,10 @@ export class TranslationService
             err409: 'Code or licence must be unique',
             err400: "Email must be unique",
             description: 'Description',
-            updateMedication: 'Update medication'
+            updateMedication: 'Update medication',
+            diagnoses: 'Diagnoses',
+            addDiagnose: 'Add diagnose',
+            updateDiagnosis: 'Update dignosis' 
 
 
         },
@@ -157,7 +160,10 @@ export class TranslationService
             err409: 'Kod ili licenca moraju biti jedinstveni',
             err400: "Email mora biti jedinstven",
             description: 'Opis',
-            updateMedication: 'Ažuriraj lek'
+            updateMedication: 'Ažuriraj lek',
+            diagnoses: 'Dijagnoze',
+            addDiagnose: 'Dodaj dijagnozu',
+            updateDiagnosis: 'Ažuriraj dijagnozu' 
 
             
         }
