@@ -1,0 +1,143 @@
+<div class="form-container">
+    <h2>{{translate.t.createMedRecord}}</h2>
+
+    @if (errorMessage) {
+        <div class="error-banner">
+            <p>{{translate.getErrorMessage(errorMessage)}}</p>
+        </div>
+    }
+
+    <form [formGroup]="recordForm" (ngSubmit)="saveRecord()">
+        
+        <div class="form-grid">
+            <div class="form-group">
+                <label><strong>{{translate.t.patient}}:</strong></label>
+                <select formControlName="animalId">
+                    <option value="">-- Select Patient --</option>
+                    @for (a of animals; track a.id) {
+                        <option [value]="$any(a.id)">{{a.name}} ({{a.code}})</option>
+                    }
+                </select>
+                @if (getControl('animalId')?.invalid && getControl('animalId')?.touched) {
+                    <div class="input-error">Required field.</div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label><strong>{{translate.t.vet}}:</strong></label>
+                <select formControlName="userId">
+                    <option value="">-- Select Veterinarian --</option>
+                    @for (v of vets; track v.id) {
+                        <option [value]="$any(v.id)">{{v.name}}</option>
+                    }
+                </select>
+                @if (getControl('userId')?.invalid && getControl('userId')?.touched) {
+                    <div class="input-error">Required field.</div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label><strong>{{translate.t.diagnoses}}:</strong></label>
+                <select formControlName="diagnosisId">
+                    <option value="">-- Select Diagnosis --</option>
+                    @for (d of diagnoses; track d.id) {
+                        <option [value]="$any(d.id)">{{d.name}} ({{d.code}})</option>
+                    }
+                </select>
+                @if (getControl('diagnosisId')?.invalid && getControl('diagnosisId')?.touched) {
+                    <div class="input-error">Required field.</div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label><strong>Visit Date:</strong></label>
+                <input type="date" formControlName="visitDate">
+                @if (getControl('visitDate')?.invalid && getControl('visitDate')?.touched) {
+                    <div class="input-error">Required field.</div>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><strong>{{translate.t.symptoms}}:</strong></label>
+            <textarea formControlName="symptoms" maxlength="200" rows="3"></textarea>
+            @if (getControl('symptoms')?.invalid && getControl('symptoms')?.touched) {
+                <div class="input-error">Required field (max 200 chars).</div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label><strong>Notes (Optional):</strong></label>
+            <textarea formControlName="notes" maxlength="200" rows="2"></textarea>
+        </div>
+
+        <div class="sub-section-block">
+            <div class="section-title-row">
+                <h3>{{translate.t.medications}}</h3>
+                <button type="button" class="add-sub-item-btn" (click)="addPrescription()">+ Add Medication</button>
+            </div>
+
+            <div formArrayName="prescriptions">
+                @for (p of prescriptions.controls; track $index) {
+                    <div [formGroupName]="$index" class="sub-item-form-row">
+                        <div class="form-group flex-2">
+                            <select formControlName="medicationId">
+                                <option value="">-- Select Medicine --</option>
+                                @for (m of medications; track m.id) {
+                                    <option [value]="$any(m.id)">{{m.name}} ({{m.code}})</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group flex-3">
+                            <input type="text" formControlName="dosageInstructions" placeholder="Dosage details (e.g. 1 pill daily)">
+                        </div>
+                        <button type="button" class="remove-sub-item-btn" (click)="removePrescription($index)">✕</button>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Procedures Sub-Form Section -->
+        <div class="sub-section-block">
+            <div class="section-title-row">
+                <h3>{{translate.t.procedures}}</h3>
+                <button type="button" class="add-sub-item-btn" (click)="addProcedure()">+ Add Procedure</button>
+            </div>
+
+            <div formArrayName="procedureRecords">
+                @for (pr of procedureRecords.controls; track $index) {
+                    <div [formGroupName]="$index" class="sub-item-form-row vertical-stack">
+                        <div class="row-fields">
+                            <div class="form-group flex-2">
+                                <select formControlName="procedureId">
+                                    <option value="">-- Select Procedure --</option>
+                                    @for (proc of procedures; track proc.id) {
+                                        <option [value]="$any(proc.id)">{{proc.name}}</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <input type="number" formControlName="durationInMinutes" placeholder="Mins">
+                            </div>
+                            <div class="form-group flex-2">
+                                <input type="text" formControlName="anesthesiaUsed" placeholder="Anesthesia details">
+                            </div>
+                            <button type="button" class="remove-sub-item-btn" (click)="removeProcedure($index)">✕</button>
+                        </div>
+                        <div class="row-fields text-area-row">
+                            <input type="text" formControlName="notes" placeholder="Specific notes for this performed action">
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Actions Panel -->
+        <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="cancel()">{{translate.t.cancel}}</button>
+            <button type="submit" class="save-btn" [disabled]="isSaving">
+                {{ isSaving ? 'Saving...' : translate.t.save }}
+            </button>
+        </div>
+    </form>
+</div>

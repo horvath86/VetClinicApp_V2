@@ -1,0 +1,44 @@
+<div class="user-dashboard">
+    <div class="dashboard-header">
+        <h1>{{translate.t.medicalRecords}}</h1>
+        <button type="button" class="add-btn" routerLink="/medicalRecords/create">
+            + {{translate.t.createMedRecord}}
+        </button>
+    </div>
+
+    @if (errorMessage) {
+        <div class="error-banner">
+            <p>{{translate.getErrorMessage(errorMessage)}}</p>
+        </div>
+    }
+
+    <div class="grid-container">
+        @for (record of medicalRecords; track record.id) {
+            <div class="medical-record-card">
+                <div class="card-header-block">
+                    <!-- ✅ Check properties match generated camelCase parameters exactly -->
+                    <span class="visit-date">{{record.visitDate}}</span>
+                    <span class="diagnosis-badge">{{record.diagnosisName}}</span>
+                </div>
+                
+                <div class="card-details">
+                    <p><strong>{{translate.t.patient}}:</strong> {{record.animalName}} ({{record.animalCode}})</p>
+                    <p><strong>{{translate.t.vet}}:</strong> {{record.veterinarianName}}</p>
+                    <p class="symptoms-preview"><strong>{{translate.t.symptoms}}:</strong> {{record.symptoms}}</p>
+                </div>
+
+                <div class="card-actions">
+                    <!-- ✅ Update route path mapping links to match your view setup -->
+                    <button type="button" class="view-details-btn" [routerLink]="['/medical-records/detail', record.id]">
+                        {{translate.t.viewFullRecord}} →
+                    </button>
+                    <button type="button" class="delete-btn-icon" (click)="deleteRecord($any(record.id), $event)">
+                        {{translate.t.delete}}
+                    </button>
+                </div>
+            </div>
+        } @empty {
+            <div class="empty-state-banner">No medical entries found.</div>
+        }
+    </div>
+</div>

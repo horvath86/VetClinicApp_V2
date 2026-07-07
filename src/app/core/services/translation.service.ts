@@ -90,7 +90,13 @@ export class TranslationService
             procedures: 'Procedures',
             addProcedure: 'Add procedure',
             updateProcedure: 'Update procedure',
-            medicalCatalogue: 'Medical catalogue'  
+            medicalCatalogue: 'Medical catalogue',
+            medicalRecords: 'Medical record',
+            createMedRecord: 'Create medical record',
+            patient: 'Patient',
+            symptoms: 'Symptoms',
+            viewFullRecord: 'View full record',
+            vet: "Veterinarian"    
 
 
         },
@@ -171,7 +177,13 @@ export class TranslationService
             procedures: 'Procedure',
             addProcedure: 'Dodaj proceduru',
             updateProcedure: 'Ažuriraj proceduru',
-            medicalCatalogue: 'Medicinski katalog'    
+            medicalCatalogue: 'Medicinski katalog',
+            medicalRecords: 'Medicinski zapis',
+            createMedRecord: 'Kreiraj medicinski zapis',
+            patient: 'Pacijent',
+            symptoms: 'Simptomi',
+            viewFullRecord: 'Pogledaj puni zapis',
+            vet: 'Veterinar'    
 
             
         }

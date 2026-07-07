@@ -16,6 +16,9 @@ import { DiagnosisEdit } from './features/diagnosis/diagnosis-edit/diagnosis-edi
 import { ProcedureList } from './features/procedure/procedure-list/procedure-list';
 import { ProcedureCreate } from './features/procedure/procedure-create/procedure-create';
 import { ProcedureEdit } from './features/procedure/procedure-edit/procedure-edit';
+import { MedicalRecordList } from './features/medical-record/medical-record-list/medical-record-list';
+import { MedicalRecordCreate } from './features/medical-record/medical-record-create/medical-record-create';
+import { MedicalRecordEdit } from './features/medical-record/medical-record-edit/medical-record-edit';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -35,5 +38,8 @@ export const routes: Routes = [
     {path: 'procedures', component: ProcedureList, canActivate: [authGuard]},
     {path: 'procedures/create', component: ProcedureCreate, canActivate: [authGuard]},
     {path: 'procedures/edit/:id', component: ProcedureEdit, canActivate: [authGuard]},
+    {path: 'medicalRecords', component: MedicalRecordList, canActivate: [authGuard]},
+    {path: 'medicalRecords/create', component: MedicalRecordCreate, canActivate: [authGuard]},
+    {path: 'medicalRecords/edit/:id', component: MedicalRecordEdit, canActivate: [authGuard]},
     {path: '**', redirectTo: 'login'}
 ];
