@@ -1,0 +1,58 @@
+<div class="user-dashboard">
+    <header class="dashboard-header">
+        <h1>{{translate.t.procedures}}</h1>
+        <button class="add-btn" routerLink="/procedures/create">+{{translate.t.addProcedure}}</button>
+    </header>
+
+    <div class="filter-bar">
+        <input 
+            type="text" 
+            [placeholder]="translate.t.searchPlaceholder" 
+            [(ngModel)]="searchTerm" 
+            (input)="loadProcedures()"
+        >
+
+    </div>
+    
+    @if(errorMessage)
+    {
+        <div class="error-banner">
+            <p>{{translate.getErrorMessage(errorMessage)}}</p>
+        </div>
+    }
+
+    <div class="grid-container">
+        @for (proc of procedures; track proc.id) 
+        {
+            <div class="procedure-card" [class.expanded]="proc.isExpanded">
+                <div class="card-header-block">
+                    <h3 class="procedure-name" [class.show-all]="proc.isExpanded">
+                        {{proc.name}}
+                    </h3>
+                </div>
+                
+                <div class="card-details">
+                    <p><strong>{{translate.t.code}}: </strong>{{proc.code}}</p>
+                    <span class="status-badge">{{ translate.t.activeProfile }}</span>
+                </div>
+
+                @if ((proc.name && proc.name.length > 45)) {
+                    <button type="button" class="btn-toggle-text" (click)="toggleExpand(proc)">
+                        {{ proc.isExpanded ? translate.t.showLess : translate.t.showMore }}
+                    </button>
+                }
+
+                <div class="card-actions">
+                    <button type="button" class="edit-btn" [routerLink]="['/procedures/edit', proc.id]">{{translate.t.edit}}</button>
+                    <button type="button" class="delete-btn" (click)="deleteProcedure(proc.id!, $event)">{{translate.t.delete}}</button>
+                </div>
+            </div>
+        }@empty{
+            @if(!errorMessage){
+                <div class="no-records">
+                    <p>{{translate.t.noRecords}}</p>
+                </div>
+            }
+        }
+    </div>
+</div><p>procedure-list works!</p>

@@ -86,7 +86,11 @@ export class TranslationService
             updateMedication: 'Update medication',
             diagnoses: 'Diagnoses',
             addDiagnose: 'Add diagnose',
-            updateDiagnosis: 'Update dignosis' 
+            updateDiagnosis: 'Update dignosis',
+            procedures: 'Procedures',
+            addProcedure: 'Add procedure',
+            updateProcedure: 'Update procedure',
+            medicalCatalogue: 'Medical catalogue'  
 
 
         },
@@ -163,7 +167,11 @@ export class TranslationService
             updateMedication: 'Ažuriraj lek',
             diagnoses: 'Dijagnoze',
             addDiagnose: 'Dodaj dijagnozu',
-            updateDiagnosis: 'Ažuriraj dijagnozu' 
+            updateDiagnosis: 'Ažuriraj dijagnozu',
+            procedures: 'Procedure',
+            addProcedure: 'Dodaj proceduru',
+            updateProcedure: 'Ažuriraj proceduru',
+            medicalCatalogue: 'Medicinski katalog'    
 
             
         }

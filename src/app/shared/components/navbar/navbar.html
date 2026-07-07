@@ -8,8 +8,20 @@
     <div class="nav-links">
         <a routerLink="/animals" routerLinkActive="active-tab">{{translate.t.patients}}</a>
         <a routerLink="/users" routerLinkActive="active-tab">{{translate.t.users}}</a>
-        <a routerLink="/medications" routerLinkActive="active-tab">{{translate.t.medications}}</a>
-        <a routerLink="/diagnoses" routerLinkActive="active-tab">{{translate.t.diagnoses}}</a>
+
+        <div class="nav-dropdown-item">
+            <button class="dropdown-trigger-btn">
+                {{ translate.t.medicalCatalogue }}
+                <span class="dropdown-arrow">▼</span>
+            </button>
+             <div class="dropdown-menu-panel">
+                <a routerLink="/medications" routerLinkActive="active-tab">{{translate.t.medications}}</a>
+                <a routerLink="/diagnoses" routerLinkActive="active-tab">{{translate.t.diagnoses}}</a>
+                <a routerLink="/procedures" routerLinkActive="active-tab">{{translate.t.procedures}}</a>
+             </div>
+        </div>
+
+        
     </div>
 
     <div class="nav-actions">

@@ -13,6 +13,9 @@ import { MedicationEdit } from './features/medication/medication-edit/medication
 import { DiagnosisList } from './features/diagnosis/diagnosis-list/diagnosis-list';
 import { DiagnosisCreate } from './features/diagnosis/diagnosis-create/diagnosis-create';
 import { DiagnosisEdit } from './features/diagnosis/diagnosis-edit/diagnosis-edit';
+import { ProcedureList } from './features/procedure/procedure-list/procedure-list';
+import { ProcedureCreate } from './features/procedure/procedure-create/procedure-create';
+import { ProcedureEdit } from './features/procedure/procedure-edit/procedure-edit';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -29,5 +32,8 @@ export const routes: Routes = [
     {path: 'diagnoses', component: DiagnosisList, canActivate: [authGuard]},
     {path: 'diagnoses/create', component: DiagnosisCreate, canActivate: [authGuard]},
     {path: 'diagnoses/edit/:id', component: DiagnosisEdit, canActivate: [authGuard]},
+    {path: 'procedures', component: ProcedureList, canActivate: [authGuard]},
+    {path: 'procedures/create', component: ProcedureCreate, canActivate: [authGuard]},
+    {path: 'procedures/edit/:id', component: ProcedureEdit, canActivate: [authGuard]},
     {path: '**', redirectTo: 'login'}
 ];
