@@ -16,7 +16,7 @@
         @for (record of medicalRecords; track record.id) {
             <div class="medical-record-card">
                 <div class="card-header-block">
-                    <!-- ✅ Check properties match generated camelCase parameters exactly -->
+                    
                     <span class="visit-date">{{record.visitDate}}</span>
                     <span class="diagnosis-badge">{{record.diagnosisName}}</span>
                 </div>
@@ -28,8 +28,8 @@
                 </div>
 
                 <div class="card-actions">
-                    <!-- ✅ Update route path mapping links to match your view setup -->
-                    <button type="button" class="view-details-btn" [routerLink]="['/medical-records/detail', record.id]">
+                  
+                    <button type="button" class="view-details-btn" [routerLink]="['/medicalRecords/details', record.id]">
                         {{translate.t.viewFullRecord}} →
                     </button>
                     <button type="button" class="delete-btn-icon" (click)="deleteRecord($any(record.id), $event)">

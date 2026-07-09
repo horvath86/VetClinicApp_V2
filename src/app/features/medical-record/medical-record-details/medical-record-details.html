@@ -1,0 +1,97 @@
+<div class="detail-container">
+    <div class="detail-header">
+        <h2>{{translate.t.medicalRecords}} - {{translate.t.viewFullRecord}}</h2>
+        <button type="button" class="back-btn" routerLink="/medicalRecords">
+            ← {{translate.t.back}}
+        </button>
+    </div>
+
+    @if (errorMessage) {
+        <div class="error-banner">
+            <p>{{translate.getErrorMessage(errorMessage)}}</p>
+        </div>
+    }
+
+    @if (record) {
+
+
+        <div class="info-grid">
+            <div class="info-box">
+                <strong>{{translate.t.visitDate}}: </strong>
+                <span>{{record.visitDate}}</span>
+            </div>
+            <div class="info-box">
+                <strong>{{translate.t.patient}}: </strong>
+                <span>{{record.animalName}} ({{record.animalCode}})</span>
+            </div>
+            <div class="info-box">
+                <strong>{{translate.t.vet}}: </strong>
+                <span>{{record.veterinarianName}}</span>
+            </div>
+        </div>
+
+
+        <div class="text-block-group">
+
+            <div class="text-card diagnosis-full-card">
+                <h3>{{translate.t.diagnoses}}</h3>
+                <p>{{record.diagnosisName}} <span class="diag-code">({{record.diagnosisCode}})</span></p>
+            </div>
+
+            <div class="text-card">
+                <h3>{{translate.t.symptoms}}</h3>
+                <p>{{record.symptoms}}</p>
+            </div>
+
+            @if (record.notes) {
+                <div class="text-card header-notes">
+                    <h3>{{translate.t.notes}}</h3>
+                    <p>{{record.notes}}</p>
+                </div>
+            }
+        </div>
+
+        <div class="catalog-section">
+            <h3>{{translate.t.medications}}</h3>
+            <div class="sub-list-container">
+                @for (p of record.prescriptions; track p.id) {
+                    <div class="sub-item-row">
+                        <div class="item-meta">
+                            <span class="item-name">{{p.medicationName}}</span>
+                        </div>
+                        <div class="item-desc">
+                            <strong>Dosage:</strong> {{p.dosageInstructions}}
+                        </div>
+                    </div>
+                } @empty {
+                    <p class="empty-section-text">{{translate.t.noPrescriptions}}</p>
+                }
+            </div>
+        </div>
+
+        <div class="catalog-section">
+            <h3>{{translate.t.procedures}}</h3>
+            <div class="sub-list-container">
+                @for (pr of record.procedureRecords; track pr.id) {
+                    <div class="sub-item-row composite-layout">
+                        <div class="row-header">
+                            <span class="item-name">{{pr.procedureName}}</span>
+                            <span class="duration-badge">{{pr.durationInMinutes}} {{translate.t.mins}}</span>
+                        </div>
+                        @if (pr.anesthesiaUsed) {
+                            <div class="anesthesia-tag">
+                                <strong>{{translate.t.anesthesia}}: </strong> {{pr.anesthesiaUsed}}
+                            </div>
+                        }
+                        <div class="item-desc custom-notes">
+                            <strong>{{translate.t.notes}}:</strong> {{pr.notes}}
+                        </div>
+                    </div>
+                } @empty {
+                    <p class="empty-section-text">{{translate.t.noProcedures}}</p>
+                }
+            </div>
+        </div>
+    }
+</div>
+

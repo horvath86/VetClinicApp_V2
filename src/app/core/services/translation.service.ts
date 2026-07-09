@@ -119,7 +119,13 @@ export class TranslationService
             durationRequired: 'Duration is required.',
             durationMin: 'Duration must be at least 1 minute.',
             anesthesiaTooLong: 'Anesthesia cannot exceed 100 characters',
-            notesTooLong: 'Notes cannot exceed 200 characters'   
+            notesTooLong: 'Notes cannot exceed 200 characters',
+            anesthesia: 'Anesthesia',
+            notes: 'Notes',
+            noPrescriptions: 'No prescriptions were recorded during this clinical session.',
+            noProcedures: 'No surgical or diagnostic procedures were logged for this session.',
+            mins: 'minutes',
+            back: 'Back'   
 
 
         },
@@ -229,7 +235,13 @@ export class TranslationService
             durationRequired: 'Trajanje je obavezno.',
             durationMin: 'Trajanje mora biti bar 1 minut.',
             anesthesiaTooLong: 'Anestezija ne može preći 100 karaktera',
-            notesTooLong: 'Beleške ne mogu preći 200 karaktera'          
+            notesTooLong: 'Beleške ne mogu preći 200 karaktera',
+            anesthesia: 'Anestezija',
+            notes: 'Beleške',
+            noPrescriptions: 'Nema recepata snimljeno tokom ove kliničke sesije',
+            noProcedures: 'Nema hiruških ili diagnostičkih procedura snimljenih za ovu sesiju.',
+            mins: 'minuta',
+            back: 'Nazad'          
 
             
         }

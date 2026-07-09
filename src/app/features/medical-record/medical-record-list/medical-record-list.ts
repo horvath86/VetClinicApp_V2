@@ -56,7 +56,7 @@ export class MedicalRecordList implements OnInit, OnDestroy {
       return;
     }
 
-    this.medicalRecordService.deleteMedicalRecord({ id: id }).subscribe({
+    this.medicalRecordService.deleteMedicalRecord(id).subscribe({
       next: () => {
         this.loadMedicalRecords();
       },
