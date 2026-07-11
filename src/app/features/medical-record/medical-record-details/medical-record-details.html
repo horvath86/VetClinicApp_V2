@@ -1,6 +1,9 @@
 <div class="detail-container">
     <div class="detail-header">
         <h2>{{translate.t.medicalRecords}} - {{translate.t.viewFullRecord}}</h2>
+         <button type="button" class="edit-main-btn" [routerLink]="['/medicalRecords/edit', $any(record?.id)]">
+            {{translate.t.edit}}
+        </button>
         <button type="button" class="back-btn" routerLink="/medicalRecords">
             ← {{translate.t.back}}
         </button>

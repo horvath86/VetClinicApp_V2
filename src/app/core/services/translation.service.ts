@@ -125,7 +125,12 @@ export class TranslationService
             noPrescriptions: 'No prescriptions were recorded during this clinical session.',
             noProcedures: 'No surgical or diagnostic procedures were logged for this session.',
             mins: 'minutes',
-            back: 'Back'   
+            back: 'Back',
+            editMedRec: 'Edit medical record',
+            visitDateRequired: 'Visit date is required',
+            medicationRequired: 'Medication is required',
+            notesRequired: "Notes are required",
+            procRequired: 'Procedure is required'     
 
 
         },
@@ -241,7 +246,12 @@ export class TranslationService
             noPrescriptions: 'Nema recepata snimljeno tokom ove kliničke sesije',
             noProcedures: 'Nema hiruških ili diagnostičkih procedura snimljenih za ovu sesiju.',
             mins: 'minuta',
-            back: 'Nazad'          
+            back: 'Nazad',
+            editMedRec: 'Ažuriraj medicinski zapis',
+            visitDateRequired: 'Datum posete je obavezan',
+            medicationRequired: 'Lek je obavezan',
+            notesRequired: "Beleške su obavezne",
+            procRequired: 'Procedura je obavezna'           
 
             
         }

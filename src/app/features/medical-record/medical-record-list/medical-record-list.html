@@ -32,6 +32,9 @@
                     <button type="button" class="view-details-btn" [routerLink]="['/medicalRecords/details', record.id]">
                         {{translate.t.viewFullRecord}} →
                     </button>
+                    <button type="button" class="edit-btn-link" [routerLink]="['/medicalRecords/edit', $any(record.id)]">
+                        {{translate.t.edit}}
+                    </button>
                     <button type="button" class="delete-btn-icon" (click)="deleteRecord($any(record.id), $event)">
                         {{translate.t.delete}}
                     </button>
